@@ -100,14 +100,7 @@ public class BasicDocument extends Document
 		// the helper function countSyllables in Document.java using a loop, 
 		// and then call it here on each word.
 		
-//		int totalsyllables= getTokens("[aeiouyAEIOUY]+").size();
 //		
-//		int syllableendswithe =getTokens( "[^aeiouyAEIOUY] e\\b "       ).size();
-//		
-//		int totallone_e = getTokens("[ .?!,(][^AEIOUYaeiouy]+[e][ .?!,)]").size();
-//		
-//		
-//		int size = totalsyllables-syllableendswithe+totallone_e;
 //		
 //		
 	

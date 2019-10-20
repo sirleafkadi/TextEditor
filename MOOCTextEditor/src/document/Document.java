@@ -69,26 +69,32 @@ public abstract class Document {
 	    // EfficientDocument (module 3).
 		
 		
-		int numSyllables = 0;
-		boolean newSyllable = true;
+		int numofSyllables = 0;
+		boolean newSyl = true;
 		String vowels = "aeiouy";
-		char[] cArray = word.toCharArray();
-		for (int i = 0; i < cArray.length; i++)
+		char[] chararray = word.toCharArray();
+		
+		
+		
+		for (int i = 0; i < chararray.length; i++)
+			
+			
 		{
-		    if (i == cArray.length-1 && Character.toLowerCase(cArray[i]) == 'e'
-		    		&& newSyllable && numSyllables > 0) {
-                numSyllables--;
+		    if (i == chararray.length-1 && Character.toLowerCase(chararray[i]) == 'e'
+		    		&& newSyl && numofSyllables > 0) {
+                numofSyllables--;
             }
-		    if (newSyllable && vowels.indexOf(Character.toLowerCase(cArray[i])) >= 0) {
-				newSyllable = false;
-				numSyllables++;
+		    if (newSyl && vowels.indexOf(Character.toLowerCase(chararray[i])) >= 0) {
+				newSyl = false;
+				numofSyllables++;
 			}
-			else if (vowels.indexOf(Character.toLowerCase(cArray[i])) < 0) {
-				newSyllable = true;
+			else if (vowels.indexOf(Character.toLowerCase(chararray[i])) < 0) {
+				newSyl = true;
 			}
+		    
+		    
 		}
-		//System.out.println( "found " + numSyllables);
-		return numSyllables;
+	
 		
 		
 		
@@ -97,6 +103,7 @@ public abstract class Document {
 		
 		
 		
+		return numofSyllables;
 
 	}
 	
