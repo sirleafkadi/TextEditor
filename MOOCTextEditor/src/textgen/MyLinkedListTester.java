@@ -109,13 +109,34 @@ public class MyLinkedListTester {
 	@Test
 	public void testRemove()
 	{
+		
 		int a = list1.remove(0);
 		assertEquals("Remove: check a is correct ", 65, a);
 		assertEquals("Remove: check element 0 is correct ", (Integer)21, list1.get(0));
 		assertEquals("Remove: check size is correct ", 2, list1.size());
 		
+		
+		
+
+				
+		
+		
+
+
+	
+			int b = longerList.remove(0);
+			assertEquals( 0, b);
+			assertEquals( LONG_LIST_LENGTH - 0 - 1, longerList.size());
+		}
+
+
+
+
+
+
+		
 		// TODO: Add more tests here
-	}
+	
 	
 	/** Test adding an element into the end of the list, specifically
 	 *  public boolean add(E element)
@@ -123,6 +144,18 @@ public class MyLinkedListTester {
 	@Test
 	public void testAddEnd()
 	{
+	
+		
+try {
+	     shortList.add(null);
+	     fail("Wrong input");
+}
+catch(NullPointerException e){}
+		
+		boolean test = shortList.add("Sirleaftesting");
+		assertEquals(true, test);
+		int testsize = shortList.size();
+		assertEquals(3, testsize);
         // TODO: implement this test
 		
 	}
@@ -132,6 +165,14 @@ public class MyLinkedListTester {
 	@Test
 	public void testSize()
 	{
+		int test= shortList.size();
+		int test2= longerList.size();
+		int test3= emptyList.size();
+		int test4= list1.size();
+		assertEquals(2,test);
+		assertEquals(10,test2);
+		assertEquals(0,test3);
+		assertEquals(3,test4);
 		// TODO: implement this test
 	}
 
@@ -144,6 +185,29 @@ public class MyLinkedListTester {
 	@Test
 	public void testAddAtIndex()
 	{
+		
+		try {
+			shortList.add(0, null);
+			fail("Wrong index");
+		}
+		catch (NullPointerException e) {
+		
+		}
+		
+		try {
+			shortList.add(3, "A");
+			fail(" Out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		
+		}
+		
+		
+		shortList.add(1, "Z");
+		String get=   (String) shortList.get(1);
+		assertEquals((String)"Z", get);
+		assertEquals(3, shortList.size());
+		
         // TODO: implement this test
 		
 	}
@@ -154,6 +218,34 @@ public class MyLinkedListTester {
 	{
 	    // TODO: implement this test
 	    
+		
+		
+		try {
+			shortList.set(2, "Prince");
+			fail("Out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		
+		}
+		
+		
+		try {
+			shortList.set(0, null);
+			fail("Wrong input size here!");
+		}
+		catch (NullPointerException e) {
+		
+		}
+		
+		
+		
+		
+		
+		shortList.set(0, "Sirleaf");
+		assertEquals( (String)"Sirleaf", shortList.get(0));
+		assertEquals( 2, shortList.size());
+		
+		
 	}
 	
 	
