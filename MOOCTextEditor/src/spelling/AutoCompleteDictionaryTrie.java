@@ -20,6 +20,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     public AutoCompleteDictionaryTrie()
 	{
 		root = new TrieNode();
+		this.size=0;
 	}
 	
 	
@@ -40,6 +41,32 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public boolean addWord(String word)
 	{
 	    //TODO: Implement this method.
+		
+		String wordtoadd = word.toLowerCase();
+		TrieNode node = root;
+		
+		for(int i=0; i< wordtoadd.length(); i++) {
+			
+				char ch = wordtoadd.charAt(i);
+			
+				if(node.getValidNextCharacters().contains(ch)) {
+					
+					node = node.getChild(ch);
+				}
+			
+				else {
+					     node =node.insert(ch);
+				}
+				
+				
+		}
+		
+		
+		if(!node.endsWord()  ) {	node.setEndsWord(true);
+		size++; return true;
+		}
+		   
+	
 	    return false;
 	}
 	
@@ -50,7 +77,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public int size()
 	{
 	    //TODO: Implement this method
-	    return 0;
+	    return size;
 	}
 	
 	
@@ -60,6 +87,28 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	public boolean isWord(String s) 
 	{
 	    // TODO: Implement this method
+		
+	String checknode = s.toLowerCase();
+	
+	TrieNode node = root;
+	
+	for(int i=0; i<checknode.length(); i++ ) {	
+		
+			char ch = checknode.charAt(i);
+			
+			if(node.getValidNextCharacters().contains(ch)) {
+				node=node.getChild(ch);
+			}
+			
+			
+			else {return false;}
+			
+		
+	}
+		
+			if(node.endsWord()) { return true;}
+	
+	
 		return false;
 	}
 
@@ -101,7 +150,16 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     	 //       Add all of its child nodes to the back of the queue
     	 // Return the list of completions
     	 
-         return null;
+  
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 return null; 
+    	 
      }
 
  	// For debugging
