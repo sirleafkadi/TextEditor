@@ -2,6 +2,9 @@ package spelling;
 
 import java.util.List;
 import java.util.Set;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -62,8 +65,10 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		}
 		
 		
-		if(!node.endsWord()  ) {	node.setEndsWord(true);
-		size++; return true;
+		if(!node.endsWord()  ) {	
+			node.setEndsWord(true);
+		size++;
+		return true;
 		}
 		   
 	
@@ -151,18 +156,55 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     	 // Return the list of completions
     	 
   
+      	 
+    	 String checkingprefix = prefix.toLowerCase();
+    	 List<String> queuelist = new LinkedList<String>();
+    	 TrieNode node = root;
+    	 for (int i = 0; i < checkingprefix.length(); i++) {
+    		 char c = checkingprefix.charAt(i);
+    		 if (node.getValidNextCharacters().contains(c)) {
+ 				node = node.getChild(c);
+ 			} else {
+ 				return queuelist;
+ 			}
+    	 }
+    	 int count = 0;
+    	 if (node.endsWord()) {
+    		 queuelist.add(node.getText());
+    		 count++;
+    	 }
     	 
+    	 List<TrieNode> completednodeQueue = new LinkedList<TrieNode>();
+    	 List<Character> children = new LinkedList<Character>(node.getValidNextCharacters());
     	 
-    	 
-    	 
-    	 
-    	 
-    	 
-    	 return null; 
-    	 
+    	 for (int i = 0; i < children.size(); i++) {
+    		 char c = children.get(i);
+    		 completednodeQueue.add(node.getChild(c));
+    	 }
+    	 while (!completednodeQueue.isEmpty() && count < numCompletions) {
+    		 TrieNode n = completednodeQueue.remove(0);
+    		 if (n.endsWord()) {
+    			 queuelist.add(n.getText());
+    			 count++;
+    		 }
+    		 
+    		 List<Character> cs = new LinkedList<Character>(n.getValidNextCharacters());
+        	 for (int i = 0; i < cs.size(); i++) {
+        		 char c = cs.get(i);
+        		 completednodeQueue.add(n.getChild(c));
+        	 }
+    	 }
+         return queuelist;
      }
-
- 	// For debugging
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 // For debugging
  	public void printTree()
  	{
  		printNode(root);
